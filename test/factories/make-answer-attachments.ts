@@ -1,10 +1,10 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-
+import { UniqueEntityID } from '@/core/application/enterprise/entities/unique-entity-id'
+import { PrismaService } from '@/core/infra/database/prisma/prisma.service'
 import {
   AnswerAttachment,
   AnswerAttachmentProps,
-} from '@/domain/forum/enterprise/entities/answer-attachment'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
+} from '@/domain/answer/enterprice/entities/answer-attachment'
+
 import { Injectable } from '@nestjs/common'
 
 export function makeAnswerAttachment(

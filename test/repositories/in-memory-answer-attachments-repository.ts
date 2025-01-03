@@ -1,4 +1,4 @@
-import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments-repository'
+import { AnswerAttachmentsRepository } from '@/domain/answer/application/repositories/answer-attachments-repository'
 import { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer-attachment'
 
 export class InMemoryAnswerAttachmentsRepository
@@ -8,7 +8,7 @@ export class InMemoryAnswerAttachmentsRepository
 
   async findManyByAnswerId(answerId: string) {
     const answerAttachments = this.items.filter(
-      (item) => item.answerId.toString() === answerId,
+      item => item.answerId.toString() === answerId,
     )
 
     return answerAttachments
@@ -19,8 +19,8 @@ export class InMemoryAnswerAttachmentsRepository
   }
 
   async deleteMany(attachments: AnswerAttachment[]): Promise<void> {
-    const answerAttachments = this.items.filter((item) => {
-      return !attachments.some((attachment) => attachment.equals(item))
+    const answerAttachments = this.items.filter(item => {
+      return !attachments.some(attachment => attachment.equals(item))
     })
 
     this.items = answerAttachments
@@ -28,7 +28,7 @@ export class InMemoryAnswerAttachmentsRepository
 
   async deleteManyByAnswerId(answerId: string) {
     const answerAttachments = this.items.filter(
-      (item) => item.answerId.toString() !== answerId,
+      item => item.answerId.toString() !== answerId,
     )
 
     this.items = answerAttachments

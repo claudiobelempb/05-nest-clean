@@ -1,8 +1,8 @@
-import { PaginationParams } from '@/core/repositories/pagination-params'
-import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
-import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment'
+import { PaginationParams } from '@/core/application/repositories/pagination-params'
+import { QuestionCommentsRepository } from '@/domain/question/application/repositories/question-comments-repository'
+import { QuestionComment } from '@/domain/question/enterprice/entities/question-comment'
 import { InMemoryStudentsRepository } from './in-memory-students-repository'
-import { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-objects/comment-with-author'
+import { CommentWithAuthor } from '@/domain/answer/enterprice/entities/value-objects/comment-with-author'
 
 export class InMemoryQuestionCommentsRepository
   implements QuestionCommentsRepository
@@ -12,7 +12,7 @@ export class InMemoryQuestionCommentsRepository
   constructor(private studentsRepository: InMemoryStudentsRepository) {}
 
   async findById(id: string) {
-    const questionComment = this.items.find((item) => item.id.toString() === id)
+    const questionComment = this.items.find(item => item.id.toString() === id)
 
     if (!questionComment) {
       return null
@@ -23,7 +23,7 @@ export class InMemoryQuestionCommentsRepository
 
   async findManyByQuestionId(questionId: string, { page }: PaginationParams) {
     const questionComments = this.items
-      .filter((item) => item.questionId.toString() === questionId)
+      .filter(item => item.questionId.toString() === questionId)
       .slice((page - 1) * 20, page * 20)
 
     return questionComments
@@ -34,10 +34,10 @@ export class InMemoryQuestionCommentsRepository
     { page }: PaginationParams,
   ) {
     const questionComments = this.items
-      .filter((item) => item.questionId.toString() === questionId)
+      .filter(item => item.questionId.toString() === questionId)
       .slice((page - 1) * 20, page * 20)
-      .map((comment) => {
-        const author = this.studentsRepository.items.find((student) => {
+      .map(comment => {
+        const author = this.studentsRepository.items.find(student => {
           return student.id.equals(comment.authorId)
         })
 
@@ -66,7 +66,7 @@ export class InMemoryQuestionCommentsRepository
 
   async delete(questionComment: QuestionComment) {
     const itemIndex = this.items.findIndex(
-      (item) => item.id === questionComment.id,
+      item => item.id === questionComment.id,
     )
 
     this.items.splice(itemIndex, 1)

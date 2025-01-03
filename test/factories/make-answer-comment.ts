@@ -1,13 +1,13 @@
 import { faker } from '@faker-js/faker'
 
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { UniqueEntityID } from '@/core/application/enterprise/entities/unique-entity-id'
 
+import { PrismaAnswerCommentMapper } from '@/core/domain/repositories/prisma/mappers/prisma-answer-comment-mapper'
+import { PrismaService } from '@/core/infra/database/prisma/prisma.service'
 import {
   AnswerComment,
   AnswerCommentProps,
-} from '@/domain/forum/enterprise/entities/answer-comment'
-import { PrismaAnswerCommentMapper } from '@/infra/database/prisma/mappers/prisma-answer-comment-mapper'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
+} from '@/domain/answer/enterprice/entities/answer-comment'
 import { Injectable } from '@nestjs/common'
 
 export function makeAnswerComment(

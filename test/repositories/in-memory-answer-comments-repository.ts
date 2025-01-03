@@ -1,8 +1,8 @@
-import { PaginationParams } from '@/core/repositories/pagination-params'
-import { AnswerCommentsRepository } from '@/domain/forum/application/repositories/answer-comments-repository'
+import { PaginationParams } from '@/core/application/repositories/pagination-params'
+import { AnswerCommentsRepository } from '@/domain/answer/application/repositories/answer-comments-repository'
 import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment'
 import { InMemoryStudentsRepository } from './in-memory-students-repository'
-import { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-objects/comment-with-author'
+import { CommentWithAuthor } from '@/domain/answer/enterprice/entities/value-objects/comment-with-author'
 
 export class InMemoryAnswerCommentsRepository
   implements AnswerCommentsRepository
@@ -12,7 +12,7 @@ export class InMemoryAnswerCommentsRepository
   constructor(private studentsRepository: InMemoryStudentsRepository) {}
 
   async findById(id: string) {
-    const answerComment = this.items.find((item) => item.id.toString() === id)
+    const answerComment = this.items.find(item => item.id.toString() === id)
 
     if (!answerComment) {
       return null
@@ -23,7 +23,7 @@ export class InMemoryAnswerCommentsRepository
 
   async findManyByAnswerId(answerId: string, { page }: PaginationParams) {
     const answerComments = this.items
-      .filter((item) => item.answerId.toString() === answerId)
+      .filter(item => item.answerId.toString() === answerId)
       .slice((page - 1) * 20, page * 20)
 
     return answerComments
@@ -34,10 +34,10 @@ export class InMemoryAnswerCommentsRepository
     { page }: PaginationParams,
   ) {
     const answerComments = this.items
-      .filter((item) => item.answerId.toString() === answerId)
+      .filter(item => item.answerId.toString() === answerId)
       .slice((page - 1) * 20, page * 20)
-      .map((comment) => {
-        const author = this.studentsRepository.items.find((student) => {
+      .map(comment => {
+        const author = this.studentsRepository.items.find(student => {
           return student.id.equals(comment.authorId)
         })
 
@@ -65,9 +65,7 @@ export class InMemoryAnswerCommentsRepository
   }
 
   async delete(answerComment: AnswerComment) {
-    const itemIndex = this.items.findIndex(
-      (item) => item.id === answerComment.id,
-    )
+    const itemIndex = this.items.findIndex(item => item.id === answerComment.id)
 
     this.items.splice(itemIndex, 1)
   }

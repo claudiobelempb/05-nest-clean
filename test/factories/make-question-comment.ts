@@ -1,14 +1,14 @@
 import { faker } from '@faker-js/faker'
 
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { UniqueEntityID } from '@/core/application/enterprise/entities/unique-entity-id'
 
+import { PrismaQuestionCommentMapper } from '@/core/domain/repositories/prisma/mappers/prisma-question-comment-mapper'
+import { PrismaService } from '@/core/infra/database/prisma/prisma.service'
 import {
   QuestionComment,
   QuestionCommentProps,
-} from '@/domain/forum/enterprise/entities/question-comment'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
+} from '@/domain/question/enterprice/entities/question-comment'
 import { Injectable } from '@nestjs/common'
-import { PrismaQuestionCommentMapper } from '@/infra/database/prisma/mappers/prisma-question-comment-mapper'
 
 export function makeQuestionComment(
   override: Partial<QuestionCommentProps> = {},

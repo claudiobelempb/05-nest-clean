@@ -1,13 +1,13 @@
 import { faker } from '@faker-js/faker'
 
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { UniqueEntityID } from '@/core/application/enterprise/entities/unique-entity-id'
+import { PrismaStudentMapper } from '@/core/domain/repositories/prisma/mappers/prisma-student-mapper'
+import { PrismaService } from '@/core/infra/database/prisma/prisma.service'
 import {
   Student,
   StudentProps,
-} from '@/domain/forum/enterprise/entities/student'
+} from '@/domain/student/enterprice/entities/student'
 import { Injectable } from '@nestjs/common'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
-import { PrismaStudentMapper } from '@/infra/database/prisma/mappers/prisma-student-mapper'
 
 export function makeStudent(
   override: Partial<StudentProps> = {},

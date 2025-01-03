@@ -1,13 +1,13 @@
 import { faker } from '@faker-js/faker'
 
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { UniqueEntityID } from '@/core/application/enterprise/entities/unique-entity-id'
+import { PrismaAttachmentMapper } from '@/core/domain/repositories/prisma/mappers/prisma-attachment-mapper'
+import { PrismaService } from '@/core/infra/database/prisma/prisma.service'
 import {
   Attachment,
   AttachmentProps,
-} from '@/domain/forum/enterprise/entities/attachment'
+} from '@/domain/attachment/enterprice/entities/attachment'
 import { Injectable } from '@nestjs/common'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
-import { PrismaAttachmentMapper } from '@/infra/database/prisma/mappers/prisma-attachment-mapper'
 
 export function makeAttachment(
   override: Partial<AttachmentProps> = {},

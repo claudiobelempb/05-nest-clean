@@ -1,12 +1,12 @@
 import { faker } from '@faker-js/faker'
 
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { UniqueEntityID } from '@/core/application/enterprise/entities/unique-entity-id'
+import { PrismaQuestionMapper } from '@/core/domain/repositories/prisma/mappers/prisma-question-mapper'
+import { PrismaService } from '@/core/infra/database/prisma/prisma.service'
 import {
   Question,
   QuestionProps,
-} from '@/domain/forum/enterprise/entities/question'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
-import { PrismaQuestionMapper } from '@/infra/database/prisma/mappers/prisma-question-mapper'
+} from '@/domain/question/enterprice/entities/question'
 import { Injectable } from '@nestjs/common'
 
 export function makeQuestion(
